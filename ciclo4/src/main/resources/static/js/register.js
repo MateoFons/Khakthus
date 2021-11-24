@@ -51,7 +51,7 @@ async function registerProcess(event) {
 
 async function sendDataSync(em, pass, name) {
   try {
-    const url = `http://144.22.225.106:8080/api/user/new`;
+    const url = `http://150.230.95.85:8080/api/user/new`;
     const body = {
       email: em,
       password: pass,
