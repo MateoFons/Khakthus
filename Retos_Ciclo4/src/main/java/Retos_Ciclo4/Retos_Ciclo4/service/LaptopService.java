@@ -11,27 +11,27 @@ import java.util.Optional;
 @Service
 public class LaptopService {
     @Autowired
-    private LaptopRepository laptopRepositoryUwU;
+    private LaptopRepository laptopRepository;
 
     public List<Laptop> getAll() {
-        return laptopRepositoryUwU.getAll();
+        return laptopRepository.getAll();
     }
 
     public Optional<Laptop> getLaptop(Integer id) {
-        return laptopRepositoryUwU.getLaptop(id);
+        return laptopRepository.getLaptop(id);
     }
 
     public Laptop create(Laptop laptop) {
         if (laptop.getId() == null) {
             return laptop;
         } else {
-            return laptopRepositoryUwU.create(laptop);
+            return laptopRepository.create(laptop);
         }
     }
 
     public Laptop update(Laptop laptop) {
         if (laptop.getId() != null) {
-            Optional<Laptop> laptopDb = laptopRepositoryUwU.getLaptop(laptop.getId());
+            Optional<Laptop> laptopDb = laptopRepository.getLaptop(laptop.getId());
             if (!laptopDb.isEmpty()) {
                 if (laptop.getBrand() != null) {
                     laptopDb.get().setBrand(laptop.getBrand());
@@ -64,7 +64,7 @@ public class LaptopService {
                     laptopDb.get().setPhotography(laptop.getPhotography());
                 }
                 laptopDb.get().setAvailability(laptop.isAvailability());
-                laptopRepositoryUwU.update(laptopDb.get());
+                laptopRepository.update(laptopDb.get());
                 return laptopDb.get();
             } else {
                 return laptop;
@@ -76,7 +76,7 @@ public class LaptopService {
 
     public boolean delete(Integer id) {
         Boolean aBoolean = getLaptop(id).map(lap -> {
-            laptopRepositoryUwU.delete(lap);
+            laptopRepository.delete(lap);
             return true;
         }).orElse(false);
         return aBoolean;
