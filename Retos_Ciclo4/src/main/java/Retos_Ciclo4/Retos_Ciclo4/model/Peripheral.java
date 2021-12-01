@@ -8,22 +8,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 
-@Document(collection = "laptops")
+@Document(collection = "peripherals")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Laptop implements Serializable {
+public class Peripheral implements Serializable {
     @Id
-    private Integer id;
+    private String reference;
     private String brand;
-    private String model;
-    private String procesor;
-    private String os;
+    private String category;
     private String description;
-    private String memory;
-    private String hardDrive;
-    private boolean availability = true;
     private double price;
+    private boolean availability = true;
     private int quantity;
     private String photography;
 }
