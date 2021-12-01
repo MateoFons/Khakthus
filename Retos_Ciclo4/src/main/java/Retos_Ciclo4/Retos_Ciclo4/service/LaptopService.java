@@ -1,8 +1,7 @@
-package Retos_Ciclo44.service;
+package Retos_Ciclo4.Retos_Ciclo4.service;
 
-import Retos_Ciclo44.model.Laptop;
-//import Retos_Ciclo44.repository.LaptopRepository;
-import Retos_Ciclo44.repository.LaptopRepository;
+import Retos_Ciclo4.Retos_Ciclo4.model.Laptop;
+import Retos_Ciclo4.Retos_Ciclo4.repository.LaptopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
-package Retos_Ciclo44.service;
+package Retos_Ciclo4.Retos_Ciclo4.service;
 
-import Retos_Ciclo44.model.User;
-import Retos_Ciclo44.repository.UserRepository;
+import Retos_Ciclo4.Retos_Ciclo4.model.User;
+import Retos_Ciclo4.Retos_Ciclo4.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

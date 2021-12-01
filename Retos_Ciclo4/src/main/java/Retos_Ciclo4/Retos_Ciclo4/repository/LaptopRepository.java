@@ -1,7 +1,7 @@
-package Retos_Ciclo44.repository;
+package Retos_Ciclo4.Retos_Ciclo4.repository;
 
-import Retos_Ciclo44.crud.LaptopInterface;
-import Retos_Ciclo44.model.Laptop;
+import Retos_Ciclo4.Retos_Ciclo4.crud.LaptopInterface;
+import Retos_Ciclo4.Retos_Ciclo4.model.Laptop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

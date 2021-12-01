@@ -1,7 +1,7 @@
-package Retos_Ciclo44.controller;
+package Retos_Ciclo4.Retos_Ciclo4.controller;
 
-import Retos_Ciclo44.model.User;
-import Retos_Ciclo44.service.UserService;
+import Retos_Ciclo4.Retos_Ciclo4.model.User;
+import Retos_Ciclo4.Retos_Ciclo4.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

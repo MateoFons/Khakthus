@@ -1,6 +1,6 @@
-package Retos_Ciclo44.crud;
+package Retos_Ciclo4.Retos_Ciclo4.crud;
 
-import Retos_Ciclo44.model.User;
+import Retos_Ciclo4.Retos_Ciclo4.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;

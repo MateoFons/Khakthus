@@ -1,7 +1,7 @@
-package Retos_Ciclo44.repository;
+package Retos_Ciclo4.Retos_Ciclo4.repository;
 
-import Retos_Ciclo44.crud.UserInterface;
-import Retos_Ciclo44.model.User;
+import Retos_Ciclo4.Retos_Ciclo4.crud.UserInterface;
+import Retos_Ciclo4.Retos_Ciclo4.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

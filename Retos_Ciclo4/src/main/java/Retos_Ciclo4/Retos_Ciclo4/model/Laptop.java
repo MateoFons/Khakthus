@@ -1,4 +1,4 @@
-package Retos_Ciclo44.model;
+package Retos_Ciclo4.Retos_Ciclo4.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
