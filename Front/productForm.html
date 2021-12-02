@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>formulario Productos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/userForm.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar bg-nav">
+        <a class="navbar-brand" href="#">
+            <img src="images/Logo-mini-menu.png" width="80" height="30" alt="contra corriente">
+        </a>
+    </nav>
+    <section class="contact-box">
+        <div class="w3-animate-opacity row no-gutters bg-dark">
+            <div id="productForm-row" class="container p-6">
+                <div id="productForm-box" class="col-md-12">
+                    <form id="userForm" class="row g-3" action="" method="post">
+                        <h1 class="text-center font-weight-bold mb-3">Registrar Producto</h1>
+                        <div class="form-group">
+                            <label for="brandProd" class="font-weight-bold">Marca<span class="text-danger">*</span></label>
+                            <input type="text" name="brandProd" id="brandProd" class="form-control" required />
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="modelProd" class="font-weight-bold">Modelo<span class="text-danger">*</span></label>
+                            <input type="text" name="modelProd" id="modelProd" class="form-control" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="processorProd" class="font-weight-bold">Procesador<span class="text-danger">*</span></label>
+                            <input type="text" name="processorProd" id="processorProd" class="form-control" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="osProd" class="font-weight-bold">Sistema Operativo<span class="text-danger">*</span></label>
+                            <input type="text" name="osProd" id="osProd" class="form-control" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="descriptionProd" class="font-weight-bold">Descripción</label>
+                            <input type="text" name="descriptionProd" id="descriptionProd" class="form-control"
+                                required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="memoryProd" class="font-weight-bold">Memoria<span class="text-danger">*</span></label>
+                            <input type="number" name="memoryProd" id="memoryProd" class="form-control" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="hardDriveProd" class="font-weight-bold">Disco duro<span class="text-danger">*</span></label>
+                            <input type="text" name="hardDriveProd" id="hardDriveProd" class="form-control" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="availabilityProd" class="font-weight-bold">Disponibilidad<span class="text-danger">*</span></label>
+                            <select name="availabilityProd" id="availabilityProd" class="form-control" required>
+                                <option selected value="">Selecciona disponibilidad</option>
+                                <option value="disponible">Disponible</option>
+                                <option value="noDisponible">No disponible</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="priceProd" class="font-weight-bold">Precio<span class="text-danger">*</span></label>
+                            <input type="number" name="priceProd" id="priceProd" class="form-control" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="quantityProd" class="font-weight-bold">Cantidad<span class="text-danger">*</span></label>
+                            <input type="number" name="quantityProd" id="quantityProd" class="form-control" required>
+                        </div>
+                        <br>
+                        <div class="form-group mb-5">
+                            <label for="url" class="font-weight-bold">Cargar imagen URL<span class="text-danger">*</span></label>
+                            <input type="url" name="url" id="url" class="form-control" placeholder="https://example.com" pattern="https://.*" size="30"required>        
+                        </div>                
+                        <br>
+                        <div class="col-md-4">
+                            <input type="submit" name="guardarDatos" class="btn btn-dark width-100" value="Guardar" onclick=""/>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="button" class="btn btn-dark width-100" value="Cancelar" onclick=""/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
