@@ -98,7 +98,14 @@ public class UserService {
 
     public Integer findLastId() {
         List<User> users = (List<User>) userRepository.getAll();
-        Integer lastId = users.size() + 1;
+        Integer lastId = 0;
+        for (User user :users){
+             Optional<User> auxiliar = userRepository.getUser(user.getId());
+             if (lastId < auxiliar.get().getId()) {
+                 lastId = auxiliar.get().getId();
+             }
+        }
+        lastId += 1;
         return lastId;
     }
 }

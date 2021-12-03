@@ -1,6 +1,7 @@
 package Retos_Ciclo4.Retos_Ciclo4.service;
 
 import Retos_Ciclo4.Retos_Ciclo4.model.Laptop;
+import Retos_Ciclo4.Retos_Ciclo4.model.User;
 import Retos_Ciclo4.Retos_Ciclo4.repository.LaptopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +24,9 @@ public class LaptopService {
 
     public Laptop create(Laptop laptop) {
         if (laptop.getId() == null) {
-            return laptop;
-        } else {
-            return laptopRepository.create(laptop);
+            laptop.setId(findLastId());
         }
+        return laptopRepository.create(laptop);
     }
 
     public Laptop update(Laptop laptop) {
@@ -80,5 +80,18 @@ public class LaptopService {
             return true;
         }).orElse(false);
         return aBoolean;
+    }
+
+    public Integer findLastId() {
+        List<Laptop> laptops = (List<Laptop>) laptopRepository.getAll();
+        Integer lastId = 0;
+        for (Laptop laptop :laptops){
+            Optional<Laptop> auxiliar = laptopRepository.getLaptop(laptop.getId());
+            if (lastId < auxiliar.get().getId()) {
+                lastId = auxiliar.get().getId();
+            }
+        }
+        lastId += 1;
+        return lastId;
     }
 }
