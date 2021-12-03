@@ -63,3 +63,43 @@ async function loginProcess(event) {
       console.log(`se presentó un error: `, error);
     }
   }
+
+
+  async function autoInit() {
+    try {
+      const url = `http://localhost:8080/api/user/all`;
+      const fetchOptions = {
+        method: "GET",
+        body: JSON.stringify(),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "Access-Control-Allow-Origin": "*",
+        },
+      };
+
+      const response = await fetch(url);
+      const convertedJson = await response.json();
+      console.log(`convertedJson`, convertedJson);
+      paintTable(convertedJson);
+    } catch (error) {
+      console.log(`se presentó un error: `, error);
+    }
+  }
+
+  function paintTable(data) {
+    let myTable = "<table>";
+    myTable += "<tr>";
+    myTable += "<th>Nombre</th>"
+    myTable += "<th>Descripción</th>"
+    myTable += "<th>Actualizar</th>"
+    myTable += "<th>Borrar</th>"
+    myTable += "</tr>";
+    for (i = 0; i < respuesta.length; i++) {
+        myTable += "<tr>";
+        myTable += "<td>" + respuesta[i].name + "</td>";
+        myTable += "<td>" + respuesta[i].description + "</td>";
+        myTable += "<td> <button onclick='actualizarInfoCategory(" + respuesta[i].id + ")'><i class='fas fa-sync'></i></button></td>";
+        myTable += "<td> <button onclick='borrarInfoCategory(" + respuesta[i].id + ")'><i class='fas fa-times-circle'></i></button></td>";
+        myTable += "</tr>";
+    }
+    myTable += "</table>";

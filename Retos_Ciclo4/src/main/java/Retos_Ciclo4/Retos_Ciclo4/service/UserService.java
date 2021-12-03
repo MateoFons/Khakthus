@@ -23,18 +23,17 @@ public class UserService {
 
     public User create(User user) {
         if (user.getId() == null) {
-            return user;
-        } else {
-            Optional<User> auxiliar = userRepository.getUser(user.getId());
-            if (auxiliar.isEmpty()) {
-                if (emailExists(user.getEmail()) == false) {
-                    return userRepository.create(user);
-                } else {
-                    return user;
-                }
+            user.setId(findLastId());
+        }
+        Optional<User> auxiliar = userRepository.getUser(user.getId());
+        if (auxiliar.isEmpty()) {
+            if (emailExists(user.getEmail()) == false) {
+                return userRepository.create(user);
             } else {
                 return user;
             }
+        } else {
+            return user;
         }
     }
 
@@ -90,10 +89,16 @@ public class UserService {
 
     public User authenticateUser(String email, String password) {
         Optional<User> usuario = userRepository.authenticateUser(email, password);
-        if (usuario.isEmpty( )) {
+        if (usuario.isEmpty()) {
             return new User();
         } else {
             return usuario.get();
         }
+    }
+
+    public Integer findLastId() {
+        List<User> users = (List<User>) userRepository.getAll();
+        Integer lastId = users.size() + 1;
+        return lastId;
     }
 }
