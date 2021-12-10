@@ -7,6 +7,5 @@ import java.util.Optional;
 
 public interface AdminInterface extends MongoRepository<Admin, Integer> {
     Optional<Admin> findByEmail(String email);
-
     Optional<Admin> findByEmailAndPassword(String email, String password);
 }

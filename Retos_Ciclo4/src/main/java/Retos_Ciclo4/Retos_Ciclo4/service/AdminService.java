@@ -1,8 +1,6 @@
 package Retos_Ciclo4.Retos_Ciclo4.service;
 
 import Retos_Ciclo4.Retos_Ciclo4.model.Admin;
-import Retos_Ciclo4.Retos_Ciclo4.model.Laptop;
-import Retos_Ciclo4.Retos_Ciclo4.model.User;
 import Retos_Ciclo4.Retos_Ciclo4.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
