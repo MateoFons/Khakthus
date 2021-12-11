@@ -101,5 +101,7 @@ async function loginProcess(event) {
         myTable += "<td> <button onclick='actualizarInfoCategory(" + respuesta[i].id + ")'><i class='fas fa-sync'></i></button></td>";
         myTable += "<td> <button onclick='borrarInfoCategory(" + respuesta[i].id + ")'><i class='fas fa-times-circle'></i></button></td>";
         myTable += "</tr>";
+        
     }
     myTable += "</table>";
+  }
