@@ -29,13 +29,13 @@ async function registerProcess(event) {
                 }
               } else {
                 console.log(`el email ya está registrado`);
-                alert(`el email ya está registrado`);
+                alert(`El email ya está registrado`);
                 window.location.reload();
               }
               //voy a enviar la información al backend, el email y la contraseña
             } else {
               console.log(`la confirmación no es válida`);
-              alert(`las contraseñas no coinciden`);
+              alert(`Las contraseñas no coinciden`);
             }
           } else {
             console.log(`la contraseña no es válida`);
@@ -76,8 +76,7 @@ async function sendDataSync(em, pass, name) {
         "Access-Control-Allow-Origin": "*",
       },
     };
-    const response = await fetch(url, fetchOptions); //si necesito enviar el cuerpo de la petición POST|PATCH|DELETE|PUT
-    //const response = await fetch(url);
+    const response = await fetch(url, fetchOptions);
     const convertedJson = await response.json();
     console.log(`convertedJson`, convertedJson);
     if (convertedJson.name) {
@@ -121,7 +120,6 @@ async function verifyData(email) {
 
 function validatePassword() {
   var p1 = document.getElementById("password").value;
-  var regularExpression  = /^[a-zA-Z0-9!@#$%^&*]$/;
 
   var espacios = false;
   var cont = 0;

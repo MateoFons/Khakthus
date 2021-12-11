@@ -24,7 +24,7 @@ async function loginProcess(event) {
         console.log(`emailValue`, emailValue);
         console.log(`passwordValue`, passwordValue);
       } else {
-        alert("alguno de los campos no existe");
+        alert("Alguno de los campos no existe");
       }
     } catch (error) {
       console.log(`se presentó un error inesperado`, error);
