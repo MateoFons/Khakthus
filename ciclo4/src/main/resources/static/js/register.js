@@ -8,19 +8,30 @@ async function registerProcess(event) {
     if (nameField && emailField && passwordField && passwordConfirmField) {
       const nameValue = nameField.value.trim();
       const emailValue = emailField.value.trim();
-      const passwordValue = passwordField.value.trim();
-      const passwordConfirmValue = passwordConfirmField.value.trim();
+      const passwordValue = passwordField.value;
+      const passwordConfirmValue = passwordConfirmField.value;
       if(nameValue != ""){
         console.log(`el nombre es válido`);
         if (emailValue != "") {
           console.log(`el email es válido`);
           if (passwordValue != "") {
-            console.log(`el password es válido`);
             if (passwordConfirmValue == passwordValue) {
               console.log(`la confirmación es correcta`);
-
-              await sendDataSync(emailValue, passwordValue, nameValue); //llamado del backend usando async y await
-              console.log(`he llamado al servidor`);
+              if (!await verifyData(emailValue)) {
+                console.log(`el email no está registrado`);
+                if (validatePassword()){
+                  console.log(`el password es válido`);
+                  await sendDataSync(emailValue, passwordValue, nameValue); //llamado del backend usando async y await
+                  console.log(`he llamado al servidor`);
+                } else {
+                  console.log(`el password no es válido`);
+                  alert ("La contraseña no puede contener espacios y debe tener entre 6 y 12 caracteres");
+                }
+              } else {
+                console.log(`el email ya está registrado`);
+                alert(`el email ya está registrado`);
+                window.location.reload();
+              }
               //voy a enviar la información al backend, el email y la contraseña
             } else {
               console.log(`la confirmación no es válida`);
@@ -51,7 +62,7 @@ async function registerProcess(event) {
 
 async function sendDataSync(em, pass, name) {
   try {
-    const url = `http://150.230.95.85:8080/api/user/new`;
+    const url = `http://localhost:8080/api/user/new`;
     const body = {
       email: em,
       password: pass,
@@ -78,5 +89,56 @@ async function sendDataSync(em, pass, name) {
     }
   } catch (error) {
     console.log(`se presentó un error: `, error);
+  }
+}
+
+async function verifyData(email) {
+  try {
+    const url = `http://localhost:8080/api/user/${email}`;
+    const body = {
+      email: email,
+    };
+    const fetchOptions = {
+      method: "GET",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
+      },
+    };
+    const response = await fetch(url);
+    const convertedJson = await response.json();
+    console.log(`convertedJson`, convertedJson);
+    if (convertedJson) {
+      console.log(`Ya existe el email`);
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.log(`se presentó un error: `, error);
+  }
+}
+
+function validatePassword() {
+  var p1 = document.getElementById("password").value;
+  var regularExpression  = /^[a-zA-Z0-9!@#$%^&*]$/;
+
+  var espacios = false;
+  var cont = 0;
+
+  while (espacios==false && (cont < p1.length)) {
+    if (p1.charAt(cont) == " ")
+      espacios = true;
+    cont++;
+  }
+    
+  if (espacios) {
+    return false;
+  } else {
+    if(p1.length > 5 && p1.length < 12){
+      return true;
+    } else{
+      return false;
+    }
   }
 }

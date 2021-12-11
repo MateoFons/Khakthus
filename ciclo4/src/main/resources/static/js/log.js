@@ -33,7 +33,7 @@ async function loginProcess(event) {
   
   async function sendDataSync(em, pass) {
     try {
-      const url = `http://150.230.95.85:8080/api/user/${em}/${pass}`;
+      const url = `http://localhost:8080/api/user/${em}/${pass}`;
       const body = {
         email: em,
         password: pass,
