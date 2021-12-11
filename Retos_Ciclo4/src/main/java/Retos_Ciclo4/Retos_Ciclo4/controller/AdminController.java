@@ -49,7 +49,7 @@ public class AdminController {
         return adminService.authenticateAdmin(email, password);
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/emailexist/{email}")
     public boolean emailExists(@PathVariable("email") String email) {
         return adminService.emailExists(email);
     }

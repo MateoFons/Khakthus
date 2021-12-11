@@ -40,6 +40,10 @@ public class AdminService {
      */
     public Admin create(Admin admin) {
         if (admin.getId() == null) {
+            admin.setId(findLastId());
+        }
+        Optional<Admin> auxiliar = adminRepository.getAdmin(admin.getId());
+        if (auxiliar.isEmpty()) {
             if (emailExists(admin.getEmail()) == false) {
                 return adminRepository.create(admin);
             } else {
@@ -111,5 +115,18 @@ public class AdminService {
         } else {
             return administrator.get();
         }
+    }
+
+    public Integer findLastId() {
+        List<Admin> admins = (List<Admin>) adminRepository.getAll();
+        Integer lastId = 0;
+        for (Admin admin :admins){
+            Optional<Admin> auxiliar = adminRepository.getAdmin(admin.getId());
+            if (lastId < auxiliar.get().getId()) {
+                lastId = auxiliar.get().getId();
+            }
+        }
+        lastId += 1;
+        return lastId;
     }
 }
