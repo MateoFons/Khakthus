@@ -7,6 +7,10 @@
     --color-grey: #f5f6f8;
 }
 
+.bg-nav {
+    background-color: var(--color-dark-xx)!important;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 1.1rem;

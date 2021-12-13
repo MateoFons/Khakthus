@@ -7,6 +7,26 @@
     --color-grey: #f5f6f8;
 }
 
+.topnav {
+    background-color: var(--color-dark-xx);
+    overflow: hidden;
+  }
+
+.topnav a {
+    float: left;
+    color: var(--color-light);
+
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 19px;
+  }
+  
+.topnav a:hover {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+}
+  
+
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 1.1rem;
