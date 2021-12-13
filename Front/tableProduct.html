@@ -75,7 +75,7 @@
                         <div class="form-group">
                             <label for="memoryProd" class="font-weight-bold">Memoria<span
                                     class="text-danger">*</span></label>
-                            <input type="number" name="memoryProd" id="memoryProd" class="form-control" required>
+                            <input type="text" name="memoryProd" id="memoryProd" class="form-control" required>
                         </div>
                         <br>
                         <div class="form-group">
@@ -146,6 +146,8 @@
             const objUser = JSON.parse(atob(obj));
             idUpdate = objUser.id;
             document.getElementById("myForm").style.display = "block";
+            $('#btnCreate').prop('disabled', true);
+            $('#btnUpdate').prop('disabled', false);
             $("#brandProd").val(objUser.brand);
             $("#modelProd").val(objUser.model);
             $("#procesorProd").val(objUser.procesor);
@@ -153,7 +155,7 @@
             $("#descriptionProd").val(objUser.description);
             $("#memoryProd").val(objUser.memory);
             $("#hardDriveProd").val(objUser.hardDrive);
-            $("#availabilityProd").val(objUser.availability);
+            document.querySelector("#availabilityProd").value = objUser.availability;
             $("#priceProd").val(objUser.price);
             $("#quantityProd").val(objUser.quantity);
             $("#photography").val(objUser.photography);
