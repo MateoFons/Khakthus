@@ -13,44 +13,83 @@ import java.util.Optional;
 @RequestMapping("/api/user")
 @CrossOrigin("*")
 public class UserController {
+    /**
+     * Instancia del UserService con anotaciones de Spring
+     */
     @Autowired
     private UserService userService;
 
+    /**
+     * Metodo para obtener todos los usuarios, utilizando la capa userService
+     * @return userService.getAll()
+     */
     @GetMapping("/all")
-    public List<User> getAll() {
+    public List<User> getAllUsers(){
         return userService.getAll();
     }
 
-    @GetMapping("/{id}")
-    public Optional<User> getUser(@PathVariable("id") int id) {
+    /**
+     * Método para buscar los usuarios por ID
+     * @param id
+     * @return userService.getUser(id)
+     */
+    @GetMapping("{id}")
+    public Optional<User> getUser(@PathVariable("id")int id){
         return userService.getUser(id);
     }
 
-    @PostMapping("/new")
-    @ResponseStatus(HttpStatus.CREATED)
-    public User create(@RequestBody User user) {
-        return userService.create(user);
+    /**
+     * Metodo para saber si un email ya esta registrado a traves del endpoint
+     * @param email
+     * @return userService.existEmail(email)
+     */
+    @GetMapping("/emailexist/{email}")
+    public boolean existEmail(@PathVariable("email") String email){
+        return userService.existEmail(email);
     }
 
-    @PutMapping("/update")
-    @ResponseStatus(HttpStatus.CREATED)
-    public User update(@RequestBody User user) {
-        return userService.update(user);
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean delete(@PathVariable("id") int id) {
-        return userService.delete(id);
-    }
-
+    /**
+     * Metodo para saber si existe / autenicar un usuario con la combinacion email / contraseña
+     * @param email
+     * @param password
+     * @return userService.authenticateUser(email, password)
+     */
     @GetMapping("/{email}/{password}")
-    public User authenticateUser(@PathVariable("email") String email, @PathVariable("password") String password) {
+    public User authenticateUser(@PathVariable("email") String email, @PathVariable("password") String password){
         return userService.authenticateUser(email, password);
     }
 
-    @GetMapping("/emailexist/{email}")
-    public boolean emailExists(@PathVariable("email") String email) {
-        return userService.emailExists(email);
+    /**
+     * Metodo para crear un nuevo usuario
+     * @param user
+     * @return userService.create(user)
+     */
+    @PostMapping("/new")
+    @ResponseStatus(HttpStatus.CREATED)
+    public User create(@RequestBody User user){
+        return userService.create(user);
     }
+
+    /**
+     * Metodo para actualizar los datos de un usuario
+     * @param user
+     * @return userService.update(user)
+     */
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public User update(@RequestBody User user){
+        return userService.update(user);
+    }
+
+    /**
+     * Metodo para borrar un usuario a traves del ID
+     * @param id
+     * @return userService.delete(id)
+     */
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable("id") int id){
+        return userService.delete(id);
+    }
+
 }

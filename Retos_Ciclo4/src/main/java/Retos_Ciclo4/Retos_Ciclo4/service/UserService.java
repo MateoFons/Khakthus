@@ -13,99 +13,103 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> getAll() {
+    public List<User> getAll(){
         return userRepository.getAll();
     }
 
-    public Optional<User> getUser(int id) {
+    public boolean existEmail(String email){
+        return userRepository.existEmail(email);
+    }
+
+    public Optional<User> getUser(int id){
         return userRepository.getUser(id);
     }
 
-    public User create(User user) {
-        if (user.getId() == null) {
-            user.setId(findLastId());
-        }
-        Optional<User> auxiliar = userRepository.getUser(user.getId());
-        if (auxiliar.isEmpty()) {
-            if (emailExists(user.getEmail()) == false) {
-                return userRepository.create(user);
-            } else {
-                return user;
-            }
-        } else {
-            return user;
-        }
-    }
-
-    public User update(User user) {
-        if (user.getId() != null) {
-            Optional<User> userDb = userRepository.getUser(user.getId());
-            if (!userDb.isEmpty()) {
-                if (user.getIdentification() != null) {
-                    userDb.get().setIdentification(user.getIdentification());
-                }
-                if (user.getName() != null) {
-                    userDb.get().setName(user.getName());
-                }
-                if (user.getAddress() != null) {
-                    userDb.get().setAddress(user.getAddress());
-                }
-                if (user.getCellPhone() != null) {
-                    userDb.get().setCellPhone(user.getCellPhone());
-                }
-                if (user.getEmail() != null) {
-                    userDb.get().setEmail(user.getEmail());
-                }
-                if (user.getPassword() != null) {
-                    userDb.get().setPassword(user.getPassword());
-                }
-                if (user.getZone() != null) {
-                    userDb.get().setZone(user.getZone());
-                }
-                if (user.getType() != null) {
-                    userDb.get().setType(user.getType());
-                }
-                userRepository.update(userDb.get());
-                return userDb.get();
-            } else {
-                return user;
-            }
-        } else {
-            return user;
-        }
-    }
-
-    public boolean delete(int userId) {
-        Boolean aBoolean = getUser(userId).map(user -> {
-            userRepository.delete(user);
-            return true;
-        }).orElse(false);
-        return aBoolean;
-    }
-
-    public boolean emailExists(String email) {
-        return userRepository.emailExists(email);
-    }
-
-    public User authenticateUser(String email, String password) {
+    public User authenticateUser(String email, String password){
         Optional<User> usuario = userRepository.authenticateUser(email, password);
-        if (usuario.isEmpty()) {
+
+        if(usuario.isEmpty()){                                                            //Si el usuario no existe / vacio crea un objeto usuario vacio
             return new User();
-        } else {
-            return usuario.get();
+        }
+        else{
+            return usuario.get();                                                         //Si no trae el objeto usuario que encuentre
+        }
+    }
+    //Sacado de la tutoria del profe Cristian, gracias profe :)
+    public User create(User user) {
+
+        //obtiene el maximo id existente en la coleccion
+        Optional<User> userIdMaximo = userRepository.lastUserId();
+
+        //si el id del Usaurio que se recibe como parametro es nulo, entonces valida el maximo id existente en base de datos
+        if (user.getId() == null) {
+            //valida el maximo id generado, si no hay ninguno aun el primer id sera 1
+            if (userIdMaximo.isEmpty())
+                user.setId(1);
+                //si retorna informacion suma 1 al maximo id existente y lo asigna como el codigo del usuario
+            else
+                user.setId(userIdMaximo.get().getId() + 1);
+
+        }
+
+        Optional<User> e = userRepository.getUser(user.getId());
+        if (e.isEmpty()) {
+            if (existEmail(user.getEmail()) == false){
+                return userRepository.create(user);
+            }else{
+                return user;
+            }
+        }else{
+            return user;
         }
     }
 
-    public Integer findLastId() {
-        List<User> users = (List<User>) userRepository.getAll();
-        Integer lastId = 0;
-        for (User user :users){
-             Optional<User> auxiliar = userRepository.getUser(user.getId());
-             if (lastId < auxiliar.get().getId()) {
-                 lastId = auxiliar.get().getId();
-             }
+    public User update(User user){
+        if(user.getId() != null){
+            Optional<User> userOptional = userRepository.getUser(user.getId());
+            if(!userOptional.isEmpty()){
+                if(user.getIdentification() != null){
+                    userOptional.get().setIdentification(user.getIdentification());
+                }
+                if(user.getName() != null){
+                    userOptional.get().setName(user.getName());
+                }
+                if(user.getAddress() != null){
+                    userOptional.get().setAddress(user.getAddress());
+                }
+                if(user.getCellPhone() != null){
+                    userOptional.get().setCellPhone(user.getCellPhone());
+                }
+                if(user.getEmail() != null){
+                    userOptional.get().setEmail(user.getEmail());
+                }
+                if(user.getPassword() != null){
+                    userOptional.get().setPassword(user.getPassword());
+                }
+                if(user.getZone() != null){
+                    userOptional.get().setZone(user.getZone());
+                }
+                if(user.getType() != null) {
+                    userOptional.get().setType(user.getType());
+                }
+
+                userRepository.update(userOptional.get());
+                return userOptional.get();
+
+            } else {
+                return user;
+            }
+        }else {
+            return user;
         }
-        lastId += 1;
-        return lastId;
+    }
+
+    public boolean delete(int id){
+        Optional<User> userOptional = userRepository.getUser(id);
+        if(!userOptional.isEmpty()){
+            userRepository.delete(userOptional.get());
+            return true;
+        }
+        return false;
     }
 }

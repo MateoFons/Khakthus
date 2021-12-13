@@ -11,35 +11,39 @@ import java.util.Optional;
 @Repository
 public class UserRepository {
     @Autowired
-    private UserInterface userInterface;
+    private UserInterface userCrudRepository;
 
     public List<User> getAll() {
-        return (List<User>) userInterface.findAll();
+        return userCrudRepository.findAll();
     }
 
-    public Optional<User> getUser(int id) {
-        return userInterface.findById(id);
+    public Optional<User> getUser(int id) {                                              //Buscar por ID para el metodo DELETE
+        return userCrudRepository.findById(id);
     }
 
-    public User create(User user) {
-        return userInterface.save(user);
+    public Optional<User> lastUserId(){
+        return userCrudRepository.findTopByOrderByIdDesc();
     }
 
-    public void update(User user) {
-        userInterface.save(user);
-    }
-
-    public void delete(User user) {
-        userInterface.delete(user);
-    }
-
-    public boolean emailExists(String email) {
-        Optional<User> usuario = userInterface.findByEmail(email);
+    public boolean existEmail(String email){
+        Optional<User> usuario = userCrudRepository.findByEmail(email);
 
         return !usuario.isEmpty();
     }
 
-    public Optional<User> authenticateUser(String email, String password) {
-        return userInterface.findByEmailAndPassword(email, password);
+    public Optional<User> authenticateUser(String email, String password){
+        return userCrudRepository.findByEmailAndPassword(email, password);
+    }
+
+    public User create(User user){
+        return userCrudRepository.save(user);
+    }
+
+    public void update(User user){
+        userCrudRepository.save(user);
+    }
+
+    public void delete(User user){
+        userCrudRepository.delete(user);
     }
 }
