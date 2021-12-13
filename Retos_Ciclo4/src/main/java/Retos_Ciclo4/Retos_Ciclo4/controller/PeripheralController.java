@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/peripheral")
+@RequestMapping("/api/peripherals")
 @CrossOrigin("*")
 public class PeripheralController {
     @Autowired
