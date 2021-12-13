@@ -18,26 +18,39 @@ public class UserService {
     }
 
     public Optional<User> getUser(int id) {
+
         return userRepository.getUser(id);
     }
 
     public User create(User user) {
+
+        //obtiene el maximo id existente en la coleccion
+        Optional<User> userIdMaximo = userRepository.lastUserId();
+
+        //si el id del Usaurio que se recibe como parametro es nulo, entonces valida el maximo id existente en base de datos
         if (user.getId() == null) {
-            user.setId(findLastId());
+            //valida el maximo id generado, si no hay ninguno aun el primer id sera 1
+            if (userIdMaximo.isEmpty())
+                user.setId(1);
+                //si retorna informacion suma 1 al maximo id existente y lo asigna como el codigo del usuario
+            else
+                user.setId(userIdMaximo.get().getId() + 1);
         }
-        Optional<User> auxiliar = userRepository.getUser(user.getId());
-        if (auxiliar.isEmpty()) {
-            if (emailExists(user.getEmail()) == false) {
+
+        Optional<User> e = userRepository.getUser(user.getId());
+        if (e.isEmpty()) {
+            if (emailExists(user.getEmail())==false){
                 return userRepository.create(user);
-            } else {
+            }else{
                 return user;
             }
-        } else {
+        }else{
             return user;
         }
     }
 
     public User update(User user) {
+
         if (user.getId() != null) {
             Optional<User> userDb = userRepository.getUser(user.getId());
             if (!userDb.isEmpty()) {
@@ -62,9 +75,7 @@ public class UserService {
                 if (user.getZone() != null) {
                     userDb.get().setZone(user.getZone());
                 }
-                if (user.getType() != null) {
-                    userDb.get().setType(user.getType());
-                }
+
                 userRepository.update(userDb.get());
                 return userDb.get();
             } else {
@@ -89,6 +100,7 @@ public class UserService {
 
     public User authenticateUser(String email, String password) {
         Optional<User> usuario = userRepository.authenticateUser(email, password);
+
         if (usuario.isEmpty()) {
             return new User();
         } else {
@@ -96,16 +108,4 @@ public class UserService {
         }
     }
 
-    public Integer findLastId() {
-        List<User> users = (List<User>) userRepository.getAll();
-        Integer lastId = 0;
-        for (User user :users){
-             Optional<User> auxiliar = userRepository.getUser(user.getId());
-             if (lastId < auxiliar.get().getId()) {
-                 lastId = auxiliar.get().getId();
-             }
-        }
-        lastId += 1;
-        return lastId;
-    }
 }
