@@ -22,7 +22,7 @@ public class LaptopController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Laptop> getClothe(@PathVariable("reference") Integer id) {
+    public Optional<Laptop> getLaptop(@PathVariable("id") int id) {
         return laptopService.getLaptop(id);
     }
 

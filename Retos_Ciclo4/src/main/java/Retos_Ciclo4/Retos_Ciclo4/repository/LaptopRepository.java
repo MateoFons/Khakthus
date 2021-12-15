@@ -2,7 +2,6 @@ package Retos_Ciclo4.Retos_Ciclo4.repository;
 
 import Retos_Ciclo4.Retos_Ciclo4.crud.LaptopInterface;
 import Retos_Ciclo4.Retos_Ciclo4.model.Laptop;
-import Retos_Ciclo4.Retos_Ciclo4.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,7 +17,7 @@ public class LaptopRepository {
         return laptopInterface.findAll();
     }
 
-    public Optional<Laptop> getLaptop(Integer id) {
+    public Optional<Laptop> getLaptop(int id) {
         return laptopInterface.findById(id);
     }
 

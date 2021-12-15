@@ -18,7 +18,7 @@ public class LaptopService {
         return laptopRepository.getAll();
     }
 
-    public Optional<Laptop> getLaptop(Integer id) {
+    public Optional<Laptop> getLaptop(int id) {
         return laptopRepository.getLaptop(id);
     }
 
