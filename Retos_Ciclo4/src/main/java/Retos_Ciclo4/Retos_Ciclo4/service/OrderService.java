@@ -1,19 +1,21 @@
 package Retos_Ciclo4.Retos_Ciclo4.service;
 
-
 import Retos_Ciclo4.Retos_Ciclo4.model.Order;
 import Retos_Ciclo4.Retos_Ciclo4.repository.OrderRepository;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-
-
+/**
+ * Clase Crea el OrderService
+ * @since 11-12-2021
+ * @version 1.0
+ * @author Grupo 4 subgrupo 2
+ */
 @Service
 public class OrderService {
-
-    @Autowired
+     @Autowired
     private OrderRepository orderRepository;
 
     public List<Order> getAll() {
@@ -25,26 +27,26 @@ public class OrderService {
     }
 
     public Order create(Order order) {
-
+        
         //obtiene el maximo id existente en la coleccion
         Optional<Order> orderIdMaxima = orderRepository.lastUserId();
-
+        
         //si el id de la orden que se recibe como parametro es nulo, entonces valida el maximo id existente en base de datos
         if (order.getId() == null) {
             //valida el maximo id generado, si no hay ninguno aun el primer id sera 1
             if (orderIdMaxima.isEmpty())
                 order.setId(1);
-                //si retorna informacion suma 1 al maximo id existente y lo asigna como el codigo de la orden
+            //si retorna informacion suma 1 al maximo id existente y lo asigna como el codigo de la orden
             else
                 order.setId(orderIdMaxima.get().getId() + 1);
         }
-
+        
         Optional<Order> e = orderRepository.getOrder(order.getId());
         if (e.isEmpty()) {
-            return orderRepository.create(order);
+            return orderRepository.create(order);            
         }else{
             return order;
-        }
+        }        
     }
 
     public Order update(Order order) {
@@ -76,6 +78,20 @@ public class OrderService {
     //Ordenes de pedido asociadas a los asesores de una zona
     public List<Order> findByZone(String zona) {
         return orderRepository.findByZone(zona);
+    }  
+    
+    //Reto 4 Listar ordenes de pedido de un asesor
+    public List<Order> ordersSalesManByID(Integer id) {
+       return orderRepository.ordersSalesManByID(id);
     }
-
+    
+    //Reto 4 Listar ordenes de pedido por x estado y asesor
+    public List<Order> ordersSalesManByState(String state, Integer id) {
+        return orderRepository.ordersSalesManByState(state,id);
+    }
+    
+    //Reto 4: Ordenes de un asesor x Fecha
+    public List<Order> ordersSalesManByDate(String dateStr, Integer id){
+        return orderRepository.ordersSalesManByDate(dateStr, id);
+    }
 }
