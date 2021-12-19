@@ -100,5 +100,14 @@ public class UserController {
     public boolean emailExists(@PathVariable("email") String email) {
         return userService.emailExists(email);
     }
+
+    /**
+     * Obtiene el contenido que tiene
+     * la tabla User en el campo monthBirthDay utilizando el month
+     */
+    @GetMapping("/birthday/{month}")
+    public List<User> getByMonthBirthtDay(@PathVariable("month") String month) {
+        return userService.getByMonthBirthtDay(month);
+    }
     
 }

@@ -58,6 +58,16 @@ public class PeripheralController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("reference") String reference) {
         return peripheralService.delete(reference);
-    } 
+    }
+
+    @GetMapping("/price/{price}")
+    public List<Peripheral> getByPrice(@PathVariable("price") Double price){
+        return peripheralService.getByPrice(price);
+    }
+
+    @GetMapping("/description/{description}")
+    public List<Peripheral> getByDescriptionContains(@PathVariable("description") String description){
+        return peripheralService.getByDescriptionContains(description);
+    }
     
 }

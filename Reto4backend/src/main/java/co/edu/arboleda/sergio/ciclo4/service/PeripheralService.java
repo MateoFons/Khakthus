@@ -82,5 +82,13 @@ public class PeripheralService {
             return true;
         }).orElse(false);
         return aBoolean;
-    }    
+    }
+
+    public List<Peripheral> getByPrice(double price){
+        return clotheRepository.getByPrice(price);
+    }
+
+    public List<Peripheral> getByDescriptionContains(String description){
+        return clotheRepository.getByDescriptionContains(description);
+    }
 }

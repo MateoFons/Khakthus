@@ -36,6 +36,14 @@ public class PeripheralRepository {
     
     public void delete(Peripheral peripheral) {
         repository.delete(peripheral);
-    }    
+    }
+
+    public List<Peripheral> getByPrice(double price){
+        return repository.findByPrice(price);
+    }
+
+    public List<Peripheral> getByDescriptionContains(String description){
+        return repository.findByDescriptionContainingIgnoreCase(description);
+    }
     
 }

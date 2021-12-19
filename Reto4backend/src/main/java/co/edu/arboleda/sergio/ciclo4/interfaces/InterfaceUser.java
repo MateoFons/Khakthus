@@ -1,7 +1,10 @@
 
 package co.edu.arboleda.sergio.ciclo4.interfaces;
 
+import co.edu.arboleda.sergio.ciclo4.model.Peripheral;
 import co.edu.arboleda.sergio.ciclo4.model.User;
+
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -17,4 +20,6 @@ public interface InterfaceUser extends MongoRepository<User, Integer>  {
     
     //Para seleccionar el usuario con el id maximo
     Optional<User> findTopByOrderByIdDesc();
+
+    List<User> findByMonthBirthtDay(String month);
 }
