@@ -94,4 +94,12 @@ public class LaptopService {
         lastId += 1;
         return lastId;
     }
+
+    public List<Laptop> getByPrice(double price){
+        return laptopRepository.getByPrice(price);
+    }
+
+    public List<Laptop> getByDescriptionContains(String description) {
+        return laptopRepository.getByDescriptionContains(description);
+    }
 }

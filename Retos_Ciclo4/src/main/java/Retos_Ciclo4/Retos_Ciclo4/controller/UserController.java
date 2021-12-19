@@ -92,4 +92,13 @@ public class UserController {
         return userService.delete(id);
     }
 
+    /**
+     * Método para buscar los usuarios por mes
+     * @param month
+     * @return userService.getByMonthBirthDay(month)
+     */
+    @GetMapping("/birthday/{month}")
+    public List<User> getByMonthBirthDay(@PathVariable("month") String month){
+        return userService.getByMonthBirthtDay(month);
+    }
 }

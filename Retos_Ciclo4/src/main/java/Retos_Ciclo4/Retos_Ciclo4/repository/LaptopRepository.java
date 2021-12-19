@@ -32,4 +32,12 @@ public class LaptopRepository {
     public void delete(Laptop laptop) {
         laptopInterface.delete(laptop);
     }
+
+    public List<Laptop> getByPrice(double price){
+        return laptopInterface.findByPrice(price);
+    }
+
+    public List<Laptop> getByDescriptionContains(String description){
+        return laptopInterface.findByDescriptionContainingIgnoreCase(description);
+    }
 }

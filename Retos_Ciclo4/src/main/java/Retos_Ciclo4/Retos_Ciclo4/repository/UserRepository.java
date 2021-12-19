@@ -46,4 +46,8 @@ public class UserRepository {
     public void delete(User user){
         userInterface.delete(user);
     }
+
+    public List<User> getByMonthBirthtDay(String month){
+        return userInterface.findByMonthBirthtDay(month);
+    }
 }
